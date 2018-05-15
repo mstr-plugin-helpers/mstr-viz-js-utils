@@ -1,10 +1,11 @@
-import { getObjectsFromModel, isVisualisationObject } from './objects'
+import { getObjectsFromModel, isVisualisationObject, getParentPanel } from './objects'
+import { replaceSpans } from './selector'
 
 let setupDropdownHelper = function () {
-  if (typeof mstrmojo.plugins.attachedListeners == "undefined") {
+  if (mstrmojo.plugins.attachedListeners === undefined) {
     mstrmojo.plugins.attachedListeners = {}
   }
-  if (typeof mstrmojo.plugins.attachedListeners.references == 'undefined') {
+  if (mstrmojo.plugins.attachedListeners.references === undefined) {
     mstrmojo.plugins.attachedListeners.references = {}
   }
 }
@@ -29,7 +30,7 @@ let setDropdownsByIdAndIndex = function (id, index) {
 
 let attachDropDownListener = function (d, func) {
   if (!mstrmojo.plugins.attachedListeners.references.hasOwnProperty(d.id)) {
-    mstrmojo.plugins.attachedListeners.references[d.id] = d.attachEventListener("renderComplete", null, func)
+    mstrmojo.plugins.attachedListeners.references[d.id] = d.attachEventListener('renderComplete', null, func)
   }
 }
 
