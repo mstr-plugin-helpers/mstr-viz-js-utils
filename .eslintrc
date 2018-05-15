@@ -1,0 +1,18 @@
+{
+  "globals": {
+    "mstrmojo": true
+  },
+  "extends": [
+    "standard",
+    "es2015"
+  ],
+  "plugins": [
+    "compat"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "compat/compat": "error"
+  }
+}
