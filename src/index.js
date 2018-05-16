@@ -2,6 +2,7 @@ export {
   attachDropDownListener,
   dropDownListenerWrapper,
   getDropdownValue,
+  propagateDropDownValueToSpans,
   setDropdownIndex,
   setDropdownsByIdAndIndex,
   setupDropdownHelper
@@ -16,6 +17,5 @@ export {
 
 export {
   getSelectorValue,
-  propagateDropDownValueToSpans,
   replaceSpans
 } from './selector'
