@@ -1,7 +1,7 @@
 import { getObjectsFromModel, isVisualisationObject, getParentPanel } from './objects'
 import { replaceSpans } from './selector'
 
-let setupDropdownHelper = function () {
+export function setupDropdownHelper () {
   if (mstrmojo.plugins.attachedListeners === undefined) {
     mstrmojo.plugins.attachedListeners = {}
   }
@@ -10,17 +10,17 @@ let setupDropdownHelper = function () {
   }
 }
 
-let getDropdownValue = function (d) {
+export function getDropdownValue (d) {
   return typeof d.getSelectedItem === 'function' ? (d.getSelectedItem() ? d.getSelectedItem().n : undefined) : undefined
 }
 
-let setDropdownIndex = function (d, idx) {
+export function setDropdownIndex (d, idx) {
   let list = d.getPopupList()
   list.render()
   list.itemsContainerNode.children[idx].click()
 }
 
-let setDropdownsByIdAndIndex = function (id, index) {
+export function setDropdownsByIdAndIndex (id, index) {
   getObjectsFromModel('mstrmojo.ui.Pulldown').filter(function (e) {
     return isVisualisationObject(e) && e.parent.defn.srcid === id
   }).forEach(function (d) {
@@ -28,13 +28,13 @@ let setDropdownsByIdAndIndex = function (id, index) {
   })
 }
 
-let attachDropDownListener = function (d, func) {
+export function attachDropDownListener (d, func) {
   if (!mstrmojo.plugins.attachedListeners.references.hasOwnProperty(d.id)) {
     mstrmojo.plugins.attachedListeners.references[d.id] = d.attachEventListener('renderComplete', null, func)
   }
 }
 
-let dropDownListenerWrapper = function (func) {
+export function dropDownListenerWrapper (func) {
   return function (msg) {
     if (msg.src) {
       func(msg.src)
@@ -42,7 +42,7 @@ let dropDownListenerWrapper = function (func) {
   }
 }
 
-let propagateDropDownValueToSpans = function (d) {
+export function propagateDropDownValueToSpans (d) {
   var replacementValue = getDropdownValue(d)
   var attributesToProcess = mstrmojo.plugins.attachedListeners.attributesToProcess
   var srcid = d.parent.defn.srcid
@@ -50,14 +50,4 @@ let propagateDropDownValueToSpans = function (d) {
     var parentPanel = getParentPanel(d)
     replaceSpans(parentPanel.domNode, attributesToProcess[srcid], replacementValue)
   }
-}
-
-export {
-  attachDropDownListener,
-  dropDownListenerWrapper,
-  getDropdownValue,
-  propagateDropDownValueToSpans,
-  setDropdownIndex,
-  setDropdownsByIdAndIndex,
-  setupDropdownHelper
 }

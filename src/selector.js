@@ -1,11 +1,13 @@
-let replaceSpans = function (domNode, className, replaceValue) {
+export function replaceSpans (domNode, className, replaceValue) {
   var spans = domNode.getElementsByClassName(className)
   for (var i = 0; i < spans.length; i++) {
     spans[i].innerHTML = replaceValue
   }
 }
 
-let getSelectorValue = function (d) {
+export function getSelectorValue (d) {
+  const map = new Map()
+  map.set('key', 'value')
   if (typeof d.getSelectedItems === 'function') {
     return d.getSelectedItems().map(function (el) { return el.n }).join(', ')
   }
@@ -13,9 +15,4 @@ let getSelectorValue = function (d) {
     return d.getSelectedItem().n
   }
   return undefined
-}
-
-export {
-  getSelectorValue,
-  replaceSpans
 }
