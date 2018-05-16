@@ -1,7 +1,7 @@
 export default {
   input: 'src/index.js',
   output: {
-    file: 'javascript/Html5ViPage.js',
+    file: 'plugins/mstr-viz-js-utils/javascript/Html5ViPage.js',
     format: 'iife',
     name: '$mstr'
   }
